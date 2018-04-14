@@ -1,0 +1,10 @@
+body{
+    color: #3C2E3D;
+    background-image: url("/static/images/body.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div{
+    background-color: rgba(255, 255, 255, 0.8);
+}

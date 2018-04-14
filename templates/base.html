@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <link rel="stylesheet" href="/static/style.css">
     <meta charset="UTF-8">
     {% if title %}
-      <title>{{ title }} - Microblog</title>
+      <title>{{ title }} - Red Theatre</title>
       {% else %}
-      <title>Welcome to Microblog</title>
+      <title>Red Theatre</title>
       {% endif %}
     </head>
     <body>
-        <div>Microblog: <a href="/index">Home</a></div>
+        <div>
+            <h1>Red Theatre</h1><a href="/index">Home</a>
+            <a href="/login">Sign in</a>
+            <a href="/tickets">Tickets</a>
+            <a href="/actors">Actors</a>
+        </div>
         <hr>
         {% block content %}{% endblock %}
     </body>

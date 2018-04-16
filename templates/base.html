@@ -10,13 +10,17 @@
       {% endif %}
     </head>
     <body>
-        <div>
-            <h1>Red Theatre</h1><a href="/index">Home</a>
-            <a href="/login">Sign in</a>
-            <a href="/tickets">Tickets</a>
-            <a href="/actors">Actors</a>
+        <div id="hat">
+                <h1>Red Theatre</h1>
+                <a href="/index">Home</a>
+                <a href="/login">Sign in</a>
+                <a href="/tickets">Tickets</a>
+                <a href="/actors">Actors</a>
         </div>
+        <div id ="content">
         <hr>
         {% block content %}{% endblock %}
+        <hr>
+        </div>
     </body>
 </html>

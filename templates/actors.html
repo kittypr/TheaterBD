@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div>
+    <div id="actors">
     <h1>Hi, {{ user.username }}!</h1>
     {% for actor in actors %}
     <p>Name: {{ actor.name }} - {{ actor.genre }}</p>

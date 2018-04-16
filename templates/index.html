@@ -2,9 +2,10 @@
 
 {% block content %}
     <div id="index">
-    <h1>Hi, {{ user.username }}!</h1>
-    {% for post in posts %}
-    <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
-    {% endfor %}
+    <h3>Welcome to the Red Theatre!</h3>
+    <p>
+        Here you can buy <a href="/tickets">tickets</a>, know our <a href="/history">history</a>,
+        learn more about our <a href="/repertoire">repertoire</a> and <a href="/actors">actors</a>.
+    </p>
     </div>
 {% endblock %}

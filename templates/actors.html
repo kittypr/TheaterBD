@@ -2,9 +2,19 @@
 
 {% block content %}
     <div id="actors">
-    <h1>Hi, {{ user.username }}!</h1>
-    {% for actor in actors %}
-    <p>Name: {{ actor.name }} - {{ actor.genre }}</p>
-    {% endfor %}
+    <table style="width:100%">
+        <tr>
+            <th>Actor name</th>
+            <th>Best Genre</th>
+            <th>Voice Range</th>
+        </tr>
+        {% for actor in actors %}
+            <tr>
+                <td>{{ actor.name }}</td>
+                <td>{{ actor.genre }}</td>
+                <td>{{ actor.voice }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     </div>
 {% endblock %}

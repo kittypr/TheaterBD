@@ -12,15 +12,19 @@
     <body>
         <div id="hat">
                 <h1>Red Theatre</h1>
-                <a href="/index">Home</a>
-                <a href="/login">Sign in</a>
-                <a href="/tickets">Tickets</a>
-                <a href="/actors">Actors</a>
+                <button><a href="/index">Home</a></button>
+                <button><a href="/login">Sign in</a></button>
+                <button><a href="/tickets">Tickets</a></button>
+                <button><a href="/actors">Actors</a></button>
         </div>
+        <hr>
         <div id ="content">
-        <hr>
         {% block content %}{% endblock %}
+        </div>
         <hr>
+        <div id="footer">
+            <p><q>All the world's a stage.</q> <br>
+            ― William Shakespeare, As You Like It</p>
         </div>
     </body>
 </html>

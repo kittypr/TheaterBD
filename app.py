@@ -1,9 +1,16 @@
 from flask import Flask, render_template, flash, redirect
 from config import Config
 from forms import LoginForm
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+import models
 
 
 @app.route('/index')
@@ -30,21 +37,17 @@ def index():
 @app.route('/actors')
 def show_actors():
     user = {'username': 'Эльдар Рязанов'}
-    actors = [
-        {
-            'name': 'John Smith',
-            'genre': 'Drama actor'
-        },
-        {
-            'name': 'Anna Blake',
-            'genre': 'Drama actor'
-        },
-        {
-            'name': 'Susann Khils',
-            'genre': 'Comedy actor'
-        }
-    ]
-    return render_template('actors.html', title='Actors', user=user, actors=actors)
+    needed = list()
+    actors = models.Actor.query.all()
+
+    for actor in actors:
+        a = dict()
+        a['name'] = str(models.Employee.query.get(actor.employee_id).name)
+        a['genre'] = str(models.Genre.query.get(actor.best_genre))
+        a['voice'] = str(models.Voice.query.get(actor.voice_range))
+        needed.append(a)
+
+    return render_template('actors.html', title='Actors', user=user, actors=needed)
 
 
 @app.route('/login', methods=['GET', 'POST'])

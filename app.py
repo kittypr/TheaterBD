@@ -59,7 +59,39 @@ def show_actors():
         a['page_id'] = actors_page_dir + str(actor.employee_id)
         needed.append(a)
 
-    return render_template('actors.html', title='Actors', actors=needed)
+    return render_template('actors.html', title='Actors', actors=needed, sort_allowed=True)
+
+
+@app.route('/act/genre/<genre>')
+def genre_selected_actors(genre):
+    needed = list()
+    actors = models.Actor.query.join(models.Genre).filter_by(name=genre).join(models.Employee).order_by(models.Employee.name)
+
+    for actor in actors:
+        a = dict()
+        a['name'] = str(models.Employee.query.get(actor.employee_id).name)
+        a['genre'] = str(models.Genre.query.get(actor.best_genre))
+        a['voice'] = str(models.Voice.query.get(actor.voice_range))
+        a['page_id'] = actors_page_dir + str(actor.employee_id)
+        needed.append(a)
+
+    return render_template('actors.html', title='Actors', actors=needed, sort_allowed=False)
+
+
+@app.route('/act/voice/<voice>')
+def voice_selected_actors(voice):
+    needed = list()
+    actors = models.Actor.query.join(models.Voice).filter_by(name=voice).join(models.Employee).order_by(models.Employee.name)
+
+    for actor in actors:
+        a = dict()
+        a['name'] = str(models.Employee.query.get(actor.employee_id).name)
+        a['genre'] = str(models.Genre.query.get(actor.best_genre))
+        a['voice'] = str(models.Voice.query.get(actor.voice_range))
+        a['page_id'] = actors_page_dir + str(actor.employee_id)
+        needed.append(a)
+
+    return render_template('actors.html', title='Actors', actors=needed, sort_allowed=False)
 
 
 @app.route('/actors/<sort>')
@@ -80,8 +112,7 @@ def sorted_show_actors(sort):
         a['page_id'] = actors_page_dir + str(actor.employee_id)
         needed.append(a)
 
-    return render_template('actors.html', title='Actors', actors=needed)
-
+    return render_template('actors.html', title='Actors', actors=needed, sort_allowed=True)
 
 
 @app.route('/login', methods=['GET', 'POST'])

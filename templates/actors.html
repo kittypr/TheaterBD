@@ -3,18 +3,29 @@
 {% block content %}
     <div id="actors">
     <table style="width:100%">
+        {% if sort_allowed %}
         <tr>
             <th><a href="/actors/name">Actor name</a></th>
             <th><a href="/actors/genre">Best Genre</a></th>
             <th><a href="/actors/voice">Voice Range</a></th>
         </tr>
+        {% else %}
+        <tr>
+            <th>Actor name</th>
+            <th>Best Genre</th>
+            <th>Voice Range</th>
+        </tr>
+        {% endif %}
         {% for actor in actors %}
             <tr>
                 <td><a href={{ actor.page_id }}>{{ actor.name }}</a></td>
-                <td>{{ actor.genre }}</td>
-                <td>{{ actor.voice }}</td>
+                <td><a href="/act/genre/{{ actor.genre }}">{{ actor.genre }}</a></td>
+                <td><a href="/act/voice/{{ actor.voice }}">{{ actor.voice }}</a></td>
             </tr>
         {% endfor %}
     </table>
     </div>
+    {% if not sort_allowed %}
+        <a href="/actors">Return to all actors</a>
+    {% endif %}
 {% endblock %}

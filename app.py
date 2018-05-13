@@ -14,7 +14,7 @@ migrate = Migrate(app, db)
 
 import models
 
-actors_page_dir = "act/"
+actors_page_dir = "/act/"
 actors_photos_dir = "/static/images/photos/"
 
 
@@ -27,7 +27,7 @@ def index():
 @app.route('/act/<actor_id>')
 def actor_page(actor_id):
     actor = models.Actor.query.filter_by(employee_id=actor_id).first()
-    actor_awards = models.Award.query.filter_by(actor_id=actor_id).order_by(models.Award.date)
+    actor_awards = models.Award.query.filter_by(actor_id=actor_id).order_by(models.Award.date).all()
 
     actor_info = dict()
     name = str(models.Employee.query.get(actor.employee_id).name)
@@ -42,6 +42,7 @@ def actor_page(actor_id):
     actor_info['genre'] = str(models.Genre.query.get(actor.best_genre))
     actor_info['voice'] = str(models.Voice.query.get(actor.voice_range))
     actor_info['photo_id'] = actors_photos_dir + str(actor.employee_id) + ".png"
+    actor_awards = actor_awards if len(actor_awards) > 0 else None
     return render_template('act/actor_page.html', title=name, actor=actor_info, awards=actor_awards)
 
 
@@ -69,7 +70,7 @@ def sorted_show_actors(sort):
     elif sort == 'voice':
         actors = models.Actor.query.order_by(models.Actor.voice_range)
     else:
-        actors = models.Actor.query.join(models.Actor.employee_id).order_by(models.Employee.name)
+        actors = models.Actor.query.join(models.Employee).order_by(models.Employee.name)
 
     for actor in actors:
         a = dict()

@@ -57,7 +57,19 @@ db.session.add(a)
 
 # third empl - act
 e = Employee(name="Victoria Langley", birth=datetime(1985, 8, 12),
-             hire_date=datetime(2010, 2, 4), sex='f', payment=1000, children=0)
+             hire_date=datetime(2010, 2, 4), sex='f', payment=1100, children=1)
+db.session.add(e)
+db.session.commit()
+a = Actor(employee_id=e.id, height=187, weight=78, voice_range=6, best_genre=3, about='I enjoy every performance and '
+                                                                                      'find theatre is gorgeous way '
+                                                                                      'to spend your time this evening.'
+                                                                                      ' Waiting for you at the stage!')
+db.session.add(a)
+
+
+# forth empl - act
+e = Employee(name="Jack Torn", birth=datetime(1983, 9, 10),
+             hire_date=datetime(2010, 2, 4), sex='m', payment=1000, children=0)
 db.session.add(e)
 db.session.commit()
 a = Actor(employee_id=e.id, height=165, weight=45, voice_range=3, best_genre=3, about='Every comedy has a little traged'
@@ -66,6 +78,7 @@ a = Actor(employee_id=e.id, height=165, weight=45, voice_range=3, best_genre=3, 
                                                                                       'watch I and other awesome '
                                                                                       'actors play comedies for you!')
 db.session.add(a)
+
 
 
 awrd = Award(actor_id=1, award="Best male actor of Texas 2012", date=datetime(2012, 12, 12))

@@ -14,7 +14,8 @@
                 </div></td>
             </tr>
     </table>
-            <hr>
+    {% if awards %}
+    <hr>
     <h3>Awards:</h3>
     <table style="width:80%">
             <div id="awards">
@@ -30,5 +31,6 @@
         {% endfor %}
             </div>
     </table>
+    {% endif %}
     </div>
 {% endblock %}
